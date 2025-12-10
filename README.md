@@ -10,6 +10,7 @@ An interactive car showcase web application featuring 360° 3D model viewing, im
 - **Car Overview**: Detailed specifications and performance metrics
 - **Modern UI**: Sleek, responsive design with Tailwind CSS
 - **Docker Support**: Containerized deployment ready
+- **Vercel Ready**: Optimized for one-click deployment on Vercel
 
 ## 🛠️ Tech Stack
 
@@ -48,6 +49,23 @@ An interactive car showcase web application featuring 360° 3D model viewing, im
 4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
+### Vercel Deployment (Recommended)
+
+1. **Connect your GitHub repository to Vercel**
+   - Go to [vercel.com](https://vercel.com) and sign in with GitHub
+   - Click "New Project" and import your repository
+   - Vercel will automatically detect Next.js and configure the project
+
+2. **Deploy**
+   - Click "Deploy" - Vercel will build and deploy automatically
+   - Your site will be live at `https://your-project.vercel.app`
+
+3. **Automatic deployments**
+   - Every push to `main` branch will trigger a new deployment
+   - Preview deployments are created for pull requests
+
+**Note**: The project includes `vercel.json` with optimized caching for 3D models and images.
+
 ### Docker Deployment
 
 1. **Build and run with Docker Compose**
@@ -80,6 +98,7 @@ GenX-CARS/
 │   └── models/            # 3D model files (.glb)
 ├── Dockerfile             # Docker configuration
 ├── docker-compose.yml     # Docker Compose configuration
+├── vercel.json            # Vercel deployment configuration
 └── package.json          # Dependencies and scripts
 ```
 
