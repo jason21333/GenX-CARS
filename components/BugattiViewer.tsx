@@ -116,15 +116,31 @@ export function BugattiViewer({
           if (child.isMesh && child.material) {
             // Handle both single material and array of materials
             const materials = Array.isArray(child.material) ? child.material : [child.material];
+            const childName = (child.name || "").toLowerCase();
             materials.forEach((mat: any) => {
               if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
-                // Set silver color (#C0C0C0 is a standard silver color)
-                mat.color.setHex(0xC0C0C0);
-                // Increase metalness for metallic look
-                mat.metalness = 0.8;
-                // Adjust roughness for shiny metallic appearance
-                mat.roughness = 0.3;
-                // Ensure material is updated
+                const matName = (mat.name || "").toLowerCase();
+                const isWheel =
+                  childName.includes("wheel") ||
+                  childName.includes("tire") ||
+                  childName.includes("tyre") ||
+                  childName.includes("rim") ||
+                  matName.includes("wheel") ||
+                  matName.includes("tire") ||
+                  matName.includes("tyre") ||
+                  matName.includes("rim");
+
+                if (isWheel) {
+                  // Rubber-like black tires
+                  mat.color.setHex(0x111111);
+                  mat.metalness = 0.05;
+                  mat.roughness = 0.9;
+                } else {
+                  // Silver body
+                  mat.color.setHex(0xC0C0C0);
+                  mat.metalness = 0.8;
+                  mat.roughness = 0.3;
+                }
                 mat.needsUpdate = true;
               }
             });
