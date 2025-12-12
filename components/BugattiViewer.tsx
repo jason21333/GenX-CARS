@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import {
   Box3,
-  Color,
+  Color, 
   AmbientLight,
   DirectionalLight,
   HemisphereLight,
@@ -110,6 +110,27 @@ export function BugattiViewer({
       (gltf) => {
         setStatus("ready");
         model = gltf.scene;
+        
+        // Change body color to silver
+        model.traverse((child: any) => {
+          if (child.isMesh && child.material) {
+            // Handle both single material and array of materials
+            const materials = Array.isArray(child.material) ? child.material : [child.material];
+            materials.forEach((mat: any) => {
+              if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
+                // Set silver color (#C0C0C0 is a standard silver color)
+                mat.color.setHex(0xC0C0C0);
+                // Increase metalness for metallic look
+                mat.metalness = 0.8;
+                // Adjust roughness for shiny metallic appearance
+                mat.roughness = 0.3;
+                // Ensure material is updated
+                mat.needsUpdate = true;
+              }
+            });
+          }
+        });
+        
         // Center and scale model
         const box = new Box3().setFromObject(model);
         const size = box.getSize(new Vector3());
