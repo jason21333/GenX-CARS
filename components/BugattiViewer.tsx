@@ -185,7 +185,7 @@ export function BugattiViewer({
                   mat.metalness = 0.05;
                   mat.roughness = 0.2;
                 } else {
-                  // Body paint – match the showcase photos (Ferrari red)
+                  
                   mat.color.setHex(0xd00000);
                   mat.metalness = 0.8;
                   mat.roughness = 0.32;
