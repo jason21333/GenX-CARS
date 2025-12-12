@@ -120,21 +120,70 @@ export function BugattiViewer({
             materials.forEach((mat: any) => {
               if (mat.isMeshStandardMaterial || mat.isMeshPhysicalMaterial) {
                 const matName = (mat.name || "").toLowerCase();
-                const isWheel =
-                  childName.includes("wheel") ||
+
+                const isTire =
                   childName.includes("tire") ||
                   childName.includes("tyre") ||
-                  childName.includes("rim") ||
-                  matName.includes("wheel") ||
                   matName.includes("tire") ||
-                  matName.includes("tyre") ||
-                  matName.includes("rim");
+                  matName.includes("tyre");
+                const isRim =
+                  childName.includes("rim") ||
+                  childName.includes("wheel") ||
+                  matName.includes("rim") ||
+                  matName.includes("wheel");
+                const isLogo =
+                  childName.includes("logo") ||
+                  childName.includes("badge") ||
+                  matName.includes("logo") ||
+                  matName.includes("badge") ||
+                  matName.includes("emblem");
+                const isTailLight =
+                  childName.includes("tail") ||
+                  childName.includes("rear_light") ||
+                  childName.includes("brake") ||
+                  matName.includes("tail") ||
+                  matName.includes("rear_light") ||
+                  matName.includes("brake");
+                const isHeadLight =
+                  childName.includes("head") ||
+                  childName.includes("lamp") ||
+                  childName.includes("headlight") ||
+                  childName.includes("front_light") ||
+                  matName.includes("head") ||
+                  matName.includes("lamp") ||
+                  matName.includes("headlight") ||
+                  matName.includes("front_light");
 
-                if (isWheel) {
+                if (isTire) {
                   // Rubber-like black tires
                   mat.color.setHex(0x111111);
                   mat.metalness = 0.05;
                   mat.roughness = 0.9;
+                } else if (isRim) {
+                  // Classic silver rims
+                  mat.color.setHex(0xbfc0c0);
+                  mat.metalness = 0.85;
+                  mat.roughness = 0.25;
+                } else if (isLogo) {
+                  // Ferrari logo yellow
+                  mat.color.setHex(0xffd700);
+                  mat.metalness = 0.2;
+                  mat.roughness = 0.4;
+                  mat.emissive?.setHex(0x000000);
+                } else if (isTailLight) {
+                  // Red tail lights with subtle glow
+                  mat.color.setHex(0xff1a1a);
+                  mat.emissive?.setHex(0x330000);
+                  mat.emissiveIntensity = 1.2;
+                  mat.metalness = 0.1;
+                  mat.roughness = 0.4;
+                } else if (isHeadLight) {
+                  // Glowing front lights
+                  mat.color.setHex(0xf5f7ff);
+                  mat.emissive?.setHex(0xcfd8ff);
+                  mat.emissiveIntensity = 2.0;
+                  mat.metalness = 0.05;
+                  mat.roughness = 0.2;
                 } else {
                   // Silver body
                   mat.color.setHex(0xC0C0C0);
