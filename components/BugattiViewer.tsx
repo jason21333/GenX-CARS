@@ -185,10 +185,10 @@ export function BugattiViewer({
                   mat.metalness = 0.05;
                   mat.roughness = 0.2;
                 } else {
-                  // Silver body
-                  mat.color.setHex(0xC0C0C0);
+                  // Body paint – match the showcase photos (Ferrari red)
+                  mat.color.setHex(0xd00000);
                   mat.metalness = 0.8;
-                  mat.roughness = 0.3;
+                  mat.roughness = 0.32;
                 }
                 mat.needsUpdate = true;
               }
